@@ -1,0 +1,448 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="632,3876" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="26">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.GoogleVision.Models</x:String>
+      <x:String>Google.Apis.Vision.v1.Data</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="44">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.GoogleVision</AssemblyReference>
+      <AssemblyReference>Google.Apis.Vision.v1</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PDF Scraping Robot" sap:VirtualizedContainerService.HintSize="612,3776" sap2010:WorkflowViewState.IdRef="Sequence_15">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="DataTable" />
+      <Variable x:TypeArguments="s:String[]" Name="LinesPage2" />
+      <Variable x:TypeArguments="x:String" Name="RequestDate" />
+      <Variable x:TypeArguments="x:String" Name="StreetAddress" />
+      <Variable x:TypeArguments="x:String" Name="CityStateZip" />
+      <Variable x:TypeArguments="x:String" Name="CurrentContractValue" />
+      <Variable x:TypeArguments="x:String" Name="OriginalContractAward" />
+      <Variable x:TypeArguments="x:String" Name="PlusOrMinus" />
+      <Variable x:TypeArguments="x:String" Name="AdjustedContractValue" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="DollarMoneyIndex" />
+      <Variable x:TypeArguments="x:Int32" Name="EndMoneyIndex" />
+      <Variable x:TypeArguments="x:String" Name="PDFFolderPath" />
+      <Variable x:TypeArguments="s:String[]" Name="files" />
+      <Variable x:TypeArguments="x:String" Name="ImageFilePath" />
+      <Variable x:TypeArguments="x:String" Name="ExcelFilePath" />
+      <Variable x:TypeArguments="x:String" Name="GoogleAPIKeyPath" />
+      <Variable x:TypeArguments="x:String" Name="currentDocument" />
+      <Variable x:TypeArguments="x:String" Name="ScrapedPage1" />
+      <Variable x:TypeArguments="s:String[]" Name="LinesPage1" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Builds the initial DataTable that will be populated with data after execution." DisplayName="Initialize Data Table" sap:VirtualizedContainerService.HintSize="570,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="InitDataTable.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DataTable">[DataTable]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Imports folder and file paths from Orchestrator Assets and saves them for use of execution. Values can be changed through Orchestrator." DisplayName="Initialize Orchestrator Assets" sap:VirtualizedContainerService.HintSize="570,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="InitAssets.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_PDFFolderPath">[PDFFolderPath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_ImageFilePath">[ImageFilePath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_GoogleAPIKeyPath">[GoogleAPIKeyPath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_ExcelFilePath">[ExcelFilePath]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <Assign sap2010:Annotation.AnnotationText="Creates an array of strings that stores each file name as a separate entry from a specific folder." DisplayName="Create an Array of Files" sap:VirtualizedContainerService.HintSize="570,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[files]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(PDFFolderPath)]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="570,3330" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="532,3103" sap2010:WorkflowViewState.IdRef="Sequence_25">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ScrapedPage2" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each File in Folder" sap:VirtualizedContainerService.HintSize="490,2556" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[files]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="filepath" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="454,2422" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap2010:Annotation.AnnotationText="Creates a string that will be used as a selector for PDF file opening and processing." DisplayName="Assign variable to Current File" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[currentDocument]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[filepath.Split("\"c)(filepath.Split("\"c).Length -1) + " - Adobe Acrobat Reader DC"]</InArgument>
+                    </Assign.Value>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Assign>
+                  <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" sap2010:Annotation.AnnotationText="Opens a PDF file using Adobe." DisplayName="Open current PDF File" FileName="[filepath]" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="StartProcess_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:StartProcess>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Process the 1st page by navigating, processing and creating a snapshot of the page to be used for Google Vision OCR scraping." DisplayName="Invoke 1st Page Processing Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Process1stPage.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_currentDocument">[currentDocument]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Saves the image that was taken with a 'Take a Snapshot' Adobe utility using Paint that will be processed by Google Vision OCR." DisplayName="Invoke Image Saving Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SaveImage.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ImageFilePath">[ImageFilePath]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Extracts image text using Google Vision OCR activity." DisplayName="Invoke Extracting Text from Image Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ExtractImageText.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_test1">[ScrapedPage1]</OutArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ImageFilePath">[ImageFilePath]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_GoogleAPIKeyPath">[GoogleAPIKeyPath]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="412,91" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[ScrapedPage1]" />
+                  <Assign sap2010:Annotation.AnnotationText="Splits the scraped String of text to an array of strings containing one line of the original String each." DisplayName="Assign Array of Scraped Text" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:String[]">[LinesPage1]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:String[]">[ScrapedPage1.Split(Environment.NewLine.ToArray)]</InArgument>
+                    </Assign.Value>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Process the 2nd page by navigating, processing and creating a snapshot of the page to be used for Google Vision OCR scraping." DisplayName="Invoke 2nd Page Processing Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Process2ndPage.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_currentDocument">[currentDocument]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Saves the image that was taken with a 'Take a Snapshot' Adobe utility using Paint that will be processed by Google Vision OCR." DisplayName="Invoke Image Saving Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SaveImage.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ImageFilePath">[ImageFilePath]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Extracts image text using Google Vision OCR activity." DisplayName="Invoke Extracting Text From Image Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ExtractImageText.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_test1">[ScrapedPage1]</OutArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ImageFilePath">[ImageFilePath]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_GoogleAPIKeyPath">[GoogleAPIKeyPath]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <Assign sap2010:Annotation.AnnotationText="Splits the scraped String of text to an array of strings containing one line of the original String each." DisplayName="Assign Array of Scraped 2nd Page Text" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:String[]">[LinesPage2]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:String[]">[ScrapedPage1.Split(Environment.NewLine.ToArray)]</InArgument>
+                    </Assign.Value>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Initializes the empty variables." DisplayName="Invoke Variable Initializing Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="AwardInitialAssign.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_OriginalContractAward">[OriginalContractAward]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_CurrentContractValue">[CurrentContractValue]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_PlusOrMinus">[PlusOrMinus]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_AdjustedContractValue">[AdjustedContractValue]</OutArgument>
+                      <OutArgument x:TypeArguments="x:Int32" x:Key="out_DollarMoneyIndex">[DollarMoneyIndex]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_RequestDate">[RequestDate]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_CityStateZip">[CityStateZip]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_StreetAddress">[StreetAddress]</OutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loops through each line in the scraped String that were stored in the String array." DisplayName="For Each Line In Scraped Array" sap:VirtualizedContainerService.HintSize="412,694" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[LinesPage2]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:String">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,560" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Extracts the Request Date and the Address of the company from the scraped String, if applicable." DisplayName="Invoke Extraction of Date &amp; Address Workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="GetDateAndAddress.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_CurrentLine">[item]</InArgument>
+                              <InArgument x:TypeArguments="s:String[]" x:Key="in_LinesArray">[LinesPage2]</InArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_StreetAddress">[StreetAddress]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_RequestDate">[RequestDate]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_CityStateZip">[CityStateZip]</InOutArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="The first possible scenario of gathering the monetary rewards out of the String. This scenario occurs if the monetary rewards are at the end of the scraped String, one after the other." DisplayName="Invoke Award Extraction Method Scenario #1" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="ExtractAwardsAtEnd.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_CurrentLine">[item]</InArgument>
+                              <InArgument x:TypeArguments="s:String[]" x:Key="in_LineArray">[LinesPage2]</InArgument>
+                              <InOutArgument x:TypeArguments="x:Int32" x:Key="io_MoneyIndex">[DollarMoneyIndex]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_OriginalContractAward">[OriginalContractAward]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_CurrentContractValue">[CurrentContractValue]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_PlusOrMinus">[PlusOrMinus]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_AdjustedContractValue">[AdjustedContractValue]</InOutArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="The second possible scenario of gathering the monetary rewards out of the String. This scenario occurs if the monetary rewards start with a Dollar sign." DisplayName="Invoke Award Extraction Method Scenario #2" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ExtractAwardsDollarSign.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_CurrentLine">[item]</InArgument>
+                              <InArgument x:TypeArguments="s:String[]" x:Key="in_LineArray">[LinesPage2]</InArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_OriginalContractAward">[OriginalContractAward]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:Int32" x:Key="io_MoneyIndex">[DollarMoneyIndex]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_CurrentContractValue">[CurrentContractValue]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_PlusOrMinus">[PlusOrMinus]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_AdjustedContractValue">[AdjustedContractValue]</InOutArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="The third possible scenario of gathering the monetary rewards out of the String. This scenario occurs if the monetary rewards are preceded by the corresponding title of the award." DisplayName="Invoke Award Extraction Method Scenario #3" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ExtractAwardsNextLine.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_CurrentLine">[item]</InArgument>
+                              <InArgument x:TypeArguments="s:String[]" x:Key="in_LineArray">[LinesPage2]</InArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_OriginalContractAward">[OriginalContractAward]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_CurrentContractValue">[CurrentContractValue]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_PlusOrMinus">[PlusOrMinus]</InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_AdjustedContractValue">[AdjustedContractValue]</InOutArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InvokeWorkflowFile>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ForEach>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Formats the awards, adding a Dollar sign to the beginning of the award if there is none." DisplayName="Invoke String Formatting Workflow" sap:VirtualizedContainerService.HintSize="412,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="FormatAwards.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_CurrentContractValue">[CurrentContractValue]</InOutArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_OriginalContractAward">[OriginalContractAward]</InOutArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_PlusOrMinus">[PlusOrMinus]</InOutArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_AdjustedContractValue">[AdjustedContractValue]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Adds the data row containing the scraped information to the DataTable that will be exported to the Excel File." ArrayRow="[{LinesPage1(1).Split(&quot;:&quot;c)(1), LinesPage1(2).Split(&quot;:&quot;c)(1), LinesPage1(3).Split(&quot;:&quot;c)(1), LinesPage1(4).Split(&quot;:&quot;c)(1), LinesPage1(7), String.Format(&quot;{0}, {1}&quot;, StreetAddress, CityStateZip), RequestDate, OriginalContractAward, CurrentContractValue, PlusOrMinus, AdjustedContractValue}]" DataTable="[DataTable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="412,22" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:AddDataRow>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+          <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Writes the DataTable to the Excel file at a designed file path." DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="490,288" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[ExcelFilePath]">
+            <ui:ExcelApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExcelWriteRange AddHeaders="False" DataTable="[DataTable]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Sheet1" StartingCell="A1" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ExcelApplicationScope.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ExcelApplicationScope>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Closes the applications after the end of execution." DisplayName="Invoke Application Closing Workflow" sap:VirtualizedContainerService.HintSize="490,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="CloseAllApplications.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="536,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,310" sap2010:WorkflowViewState.IdRef="Sequence_24">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Error Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Fatal" Message="[&quot;An exception occured. The robot is shut down&quot;]" />
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="If there is an error during execution, the process shuts down and all applications are killed." DisplayName="Invoke Closing All Applications Workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="CloseAllApplications.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
